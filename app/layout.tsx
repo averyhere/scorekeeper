@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Sudoku by Avery Ondo",
-  description: "A Sudoku game built with Next.js",
+  title: "Scorekeeper by Avery Ondo",
+  description: "A simple score keeping app.",
 };
 
 export default function RootLayout({
