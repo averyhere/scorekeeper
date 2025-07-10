@@ -1,10 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { Github } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 import {
   usePointTrackerStore,
@@ -13,22 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 export function PointTracker() {
-  const {
-    scoreboard,
-    newGame,
-    addPlayer,
-    removePlayer,
-    pointer,
-    setPointer,
-    incrementPoints,
-  } = usePointTrackerStore();
-  const [defaultPoints, setDefaultPoints] = useState<number>(50);
-
-  const handleAddPlayer = (formData: FormData) => {
-    const newPlayerName = formData.get("newPlayerName") as string;
-
-    addPlayer(newPlayerName, defaultPoints);
-  };
+  const { scoreboard, removePlayer, pointer, setPointer, incrementPoints } =
+    usePointTrackerStore();
 
   const handleAddPoints = (formData: FormData) => {
     const points = formData.get("addPoints") as string;
@@ -42,62 +24,8 @@ export function PointTracker() {
     incrementPoints(pointer!, Number(points), "subtract");
   };
 
-  console.log("scoreboard", scoreboard);
-  console.log("pointer", pointer);
   return (
     <div className="w-full flex flex-col gap-8">
-      <header className="flex flex-col md:flex-row gap-4 justify-between items-center">
-        <div className="flex gap-4 justify-center items-center">
-          <Button onClick={newGame}>New Game / Reset</Button>
-        </div>
-
-        <form className="flex gap-2" action={handleAddPlayer}>
-          <div className="flex flex-col">
-            <label htmlFor="newPlayerName" className="text-xs">
-              Name
-            </label>
-            <input
-              type="text"
-              required={true}
-              className="border border-purple px-3 py-2 w-50 disabled:opacity-50"
-              placeholder="Add a player"
-              name="newPlayerName"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="defaultPoints" className="text-xs text-center">
-              Initial Points
-            </label>
-            <input
-              type="number"
-              inputMode="numeric"
-              required={true}
-              defaultValue={defaultPoints}
-              name="defaultPoints"
-              className="border border-purple px-3 py-2 w-20 disabled:opacity-50"
-              placeholder="Staring Points"
-              onChange={(e) => setDefaultPoints(Number(e.target.value))}
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs">&nbsp;</span>
-            <Button type="submit">Add</Button>
-          </div>
-        </form>
-
-        <div className="gap-4 justify-center items-center order-1 hidden md:flex">
-          <Link
-            className="hover:text-pink"
-            href="https://github.com/averyhere/sudoku"
-            target="_blank"
-          >
-            <Github className="size-6" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
-
       {scoreboard.length ? (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 items-center justify-center">
           {scoreboard.map((player: Player, index: number) => (

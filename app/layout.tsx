@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { Lexend_Deca } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SkipToMainContentLink } from "@/components/main";
+import { Header } from "@/components/header";
 import "./globals.css";
 
 const lexendDeca = Lexend_Deca({
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className={`${lexendDeca.variable} ${lexendDeca.className}`}>
         <SkipToMainContentLink />
         <Providers>
+          <Header />
           <div className="w-full h-full flex items-center justify-center">
             {children}
           </div>
