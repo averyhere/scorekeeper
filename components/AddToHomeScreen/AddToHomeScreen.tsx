@@ -62,7 +62,7 @@ export function AddToHomeScreen() {
     useUserAgent();
   const addToHomeScreenPromptCookie = getCookie(COOKIE_NAME);
   const [isOpen, setIsOpen] = useState<boolean>(
-    addToHomeScreenPromptCookie === "dontShow" ? false : true,
+    addToHomeScreenPromptCookie === "aoskDontShow" ? false : true,
   );
 
   // const closePrompt = () => {
@@ -73,12 +73,12 @@ export function AddToHomeScreen() {
     // Create date 1 year from now
     const date = new Date();
     date.setFullYear(date.getFullYear() + 1);
-    setCookie(COOKIE_NAME, "dontShow", { expires: date }); // Set cookie for a year
+    setCookie(COOKIE_NAME, "aoskDontShow", { expires: date }); // Set cookie for a year
     handleOpenChange();
   };
 
   useEffect(() => {
-    if (addToHomeScreenPromptCookie !== "dontShow") {
+    if (addToHomeScreenPromptCookie !== "aoskDontShow") {
       // Only show prompt if user is on mobile and app is not installed
       if (isMobile && !isStandalone) {
         if (userAgent === "Safari") {
@@ -135,7 +135,7 @@ export function AddToHomeScreen() {
     if (!isOpen) {
       const date = new Date();
       date.setDate(date.getDate() + 1);
-      setCookie(COOKIE_NAME, "dontShow", { expires: date }); // Set cookie for a year
+      setCookie(COOKIE_NAME, "aoskDontShow", { expires: date }); // Set cookie for a year
     }
     mainElement.focus();
   };
@@ -161,8 +161,8 @@ export function AddToHomeScreen() {
               Play offline!
             </DrawerTitle>
             <DrawerDescription className="text-balance px-4">
-              For the best experience, and to play offline, we recommend adding
-              the Sudoku app to your home screen.
+              For the best experience, and for offline use, we recommend adding
+              the Scorekeeper app to your home screen.
             </DrawerDescription>
           </DrawerHeader>
           <Prompt />
